@@ -1,0 +1,57 @@
+{
+  "_comment": "这是人工标准答案的示例，用于测试评测脚本",
+  "case_id": "sample_case_001",
+  "reviewer": "张造价（注册造价工程师）",
+  "review_date": "2026-05-18",
+  "applicable_standard": "GB 50500-2013 + 某省补充定额",
+  "items": [
+    {
+      "id": "GA-001",
+      "name": "客厅地面瓷砖",
+      "spec": "600×600 抛光砖",
+      "unit": "m²",
+      "formula": "6.0 × 4.5 = 27.00",
+      "quantity": 27.0,
+      "drawing_ref": "建施-01 客厅区域 A-B/1-2 轴",
+      "notes": "按净面积计算，不扣柱",
+      "reviewer_confidence": "高"
+    },
+    {
+      "id": "GA-002",
+      "name": "卧室地面木地板",
+      "spec": "复合木地板 12mm",
+      "unit": "m²",
+      "formula": "4.2 × 3.6 = 15.12",
+      "quantity": 15.12,
+      "drawing_ref": "建施-01 卧室区域 C-D/1-2 轴",
+      "notes": "按净面积计算",
+      "reviewer_confidence": "高"
+    },
+    {
+      "id": "GA-003",
+      "name": "卫生间地面防水",
+      "spec": "聚氨酯防水涂料 1.5mm",
+      "unit": "m²",
+      "formula": "2.1 × 1.8 = 3.78",
+      "quantity": 3.78,
+      "drawing_ref": "建施-03 卫生间详图",
+      "notes": "地面面积",
+      "reviewer_confidence": "高"
+    },
+    {
+      "id": "GA-004",
+      "name": "卫生间墙面防水",
+      "spec": "聚氨酯防水涂料 1.5mm，墙面高度 1800mm",
+      "unit": "m²",
+      "formula": "(2.1 + 1.8) × 2 × 1.8 = 14.04",
+      "quantity": 14.04,
+      "drawing_ref": "建施-03 卫生间详图，设计说明第 5 条",
+      "notes": "墙面防水高度 1800mm，经设计确认",
+      "reviewer_confidence": "高"
+    }
+  ],
+  "total_items": 4,
+  "discipline": "装修工程",
+  "notes": "GA-004 卫生间墙面防水为 AI 漏项，已补充。",
+  "signature": "张造价 / 2026-05-18"
+}

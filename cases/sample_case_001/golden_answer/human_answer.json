@@ -1,0 +1,42 @@
+{
+  "_comment": "人工标准答案模板 — 由造价师填写，用于评测 AI 输出质量",
+  "_instructions": [
+    "1. 本文件由具备造价资质的人员手工填写",
+    "2. 所有数量必须有图纸依据和计算式",
+    "3. 填写完成后删除 _comment 和 _instructions 字段",
+    "4. 此文件是评测 AI 准确性的基准，请认真填写"
+  ],
+
+  "case_id": "sample_case_001",
+  "reviewer": "（填写：造价师姓名 + 资质）",
+  "review_date": "（填写：YYYY-MM-DD）",
+  "applicable_standard": "（填写：适用清单/定额规范）",
+
+  "items": [
+    {
+      "id": "GA-001",
+      "name": "示例项目：客厅地面瓷砖",
+      "spec": "600×600 抛光砖",
+      "unit": "m²",
+      "formula": "（示例）6.0 × 4.5 = 27.00",
+      "quantity": 27.0,
+      "drawing_ref": "建施-01 客厅区域",
+      "notes": "按净面积计算，不扣除柱脚",
+      "reviewer_confidence": "高"
+    }
+  ],
+
+  "uncertain_items_resolved": [
+    {
+      "item": "示例：踢脚线高度",
+      "resolution": "图纸说明第 3 条：踢脚线高度 100mm",
+      "resolved_by": "（造价师姓名）",
+      "resolved_date": "（日期）"
+    }
+  ],
+
+  "total_items": 1,
+  "discipline": "装修工程",
+  "notes": "（填写：其他说明）",
+  "signature": "（造价师签名确认，此答案可作为评测基准）"
+}

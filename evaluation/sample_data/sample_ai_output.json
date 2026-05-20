@@ -1,0 +1,60 @@
+{
+  "_comment": "这是 AI 输出的示例格式，用于测试评测脚本",
+  "task_type": "quantity_takeoff",
+  "case_id": "sample_case_001",
+  "discipline": "装修工程",
+  "items": [
+    {
+      "id": "QT-001",
+      "name": "客厅地面瓷砖",
+      "spec": "600×600 抛光砖",
+      "unit": "m²",
+      "formula": "6.0 × 4.5 = 27.00",
+      "quantity": 27.0,
+      "drawing_ref": "建施-01 客厅区域",
+      "notes": "按净面积计算"
+    },
+    {
+      "id": "QT-002",
+      "name": "卧室地面木地板",
+      "spec": "复合木地板 12mm",
+      "unit": "m²",
+      "formula": "4.2 × 3.6 = 15.12",
+      "quantity": 15.12,
+      "drawing_ref": "建施-01 卧室区域",
+      "notes": "按净面积计算"
+    },
+    {
+      "id": "QT-003",
+      "name": "卫生间防水",
+      "spec": "聚氨酯防水涂料 1.5mm",
+      "unit": "m²",
+      "formula": "2.1 × 1.8 = 3.78",
+      "quantity": 3.78,
+      "drawing_ref": "建施-03 卫生间详图",
+      "notes": "地面面积，墙面防水高度待确认"
+    }
+  ],
+  "uncertain_items": [
+    {
+      "id": "UC-001",
+      "item": "卫生间墙面防水高度",
+      "reason": "图纸未明确标注防水高度是全贴还是仅至 1800mm",
+      "action_required": "请设计确认防水范围",
+      "impact": "影响墙面防水面积约 5-10 m²",
+      "priority": "中"
+    }
+  ],
+  "summary": "本次初算共 3 个项目，1 个不确定项待确认。",
+  "total_items": 3,
+  "uncertain_count": 1,
+  "review_notes": "以上工程量为 AI 初稿，所有数据必须经注册造价师审核后方可使用。",
+  "_meta": {
+    "task_type": "quantity_takeoff",
+    "case_id": "sample_case_001",
+    "model": "claude-sonnet-4-6",
+    "timestamp": "2026-05-18T10:00:00",
+    "review_required": true,
+    "disclaimer": "AI 输出仅作为工程量初稿参考，不作为最终造价成果，必须经过注册造价师人工复核后方可使用。"
+  }
+}

@@ -1,0 +1,26 @@
+# Cost Engineer AI Agent — 依赖清单
+# 安装：pip install -r requirements.txt
+
+# Claude API（必须）
+anthropic>=0.40.0
+
+# Excel 读写
+openpyxl>=3.1.0
+
+# PDF 读取（可选，用于读取图纸 PDF）
+pypdf>=4.0.0
+
+# 数据处理（可选，用于评测脚本）
+pandas>=2.0.0
+
+# YAML 配置读取
+PyYAML>=6.0
+
+# 类型安全（Python 3.11+ 自带，可选）
+# pydantic>=2.0.0
+
+# ---- 以下为未来集成预留，当前不安装 ----
+# slack-sdk>=3.0.0          # Slack 集成
+# wechatpy>=2.0.0           # 企业微信集成
+# pywinauto>=0.6.0          # 广联达 RPA 自动化（Windows）
+# pyautogui>=0.9.0          # 跨平台 GUI 自动化

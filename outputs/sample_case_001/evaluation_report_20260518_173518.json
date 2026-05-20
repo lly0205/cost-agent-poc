@@ -1,0 +1,81 @@
+{
+  "case_id": "sample_case_001",
+  "ai_output_file": "sample_ai_output.json",
+  "golden_answer_reviewer": "（填写：造价师姓名 + 资质）",
+  "evaluation_timestamp": "2026-05-18T17:35:18.479588",
+  "scores": {
+    "accuracy": {
+      "score": 0.0,
+      "comment": "0/1 条目偏差 ≤5%"
+    },
+    "omission_rate": {
+      "score": 100.0,
+      "comment": "漏项 1 条"
+    },
+    "duplication_rate": {
+      "score": 0.0,
+      "comment": "发现 0 条疑似重复"
+    },
+    "quantity_deviation": {
+      "score": 0.0,
+      "comment": "无可比较的匹配条目"
+    },
+    "explainability": {
+      "score": 100.0,
+      "comment": "3/3 条有计算式和图纸依据"
+    },
+    "review_cost_score": {
+      "score": 33.3,
+      "comment": "不确定项 1 条"
+    },
+    "drawing_reference": {
+      "score": 100.0,
+      "comment": "3/3 条有图纸依据"
+    },
+    "uncertainty_marking": {
+      "score": 80.0,
+      "comment": "已标注 1 个不确定项，需人工确认"
+    },
+    "overall_score": 50.7
+  },
+  "item_comparisons": [
+    {
+      "item": "示例项目：客厅地面瓷砖",
+      "ai_quantity": null,
+      "golden_quantity": 27.0,
+      "unit": "m²",
+      "deviation_pct": 100.0,
+      "status": "omission"
+    },
+    {
+      "item": "客厅地面瓷砖",
+      "ai_quantity": 27.0,
+      "golden_quantity": null,
+      "unit": "m²",
+      "deviation_pct": null,
+      "status": "extra"
+    },
+    {
+      "item": "卧室地面木地板",
+      "ai_quantity": 15.12,
+      "golden_quantity": null,
+      "unit": "m²",
+      "deviation_pct": null,
+      "status": "extra"
+    },
+    {
+      "item": "卫生间防水",
+      "ai_quantity": 3.78,
+      "golden_quantity": null,
+      "unit": "m²",
+      "deviation_pct": null,
+      "status": "extra"
+    }
+  ],
+  "summary": {
+    "total_golden_items": 1,
+    "total_ai_items": 3,
+    "total_uncertain_items": 1,
+    "overall_score": 50.7
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "task_type": "quantity_takeoff",
+  "case_id": "sample_case_001",
+  "status": "stub_mode",
+  "items": [],
+  "uncertain_items": [
+    "【存根模式】未调用 Claude API，请设置 ANTHROPIC_API_KEY 环境变量。"
+  ],
+  "summary": "存根模式，未实际调用 AI。",
+  "review_notes": "请设置 ANTHROPIC_API_KEY 后重新运行以获取真实结果。",
+  "_meta": {
+    "task_type": "quantity_takeoff",
+    "task_display": "工程量初算",
+    "case_id": "sample_case_001",
+    "model": "claude-sonnet-4-6",
+    "timestamp": "2026-05-18T17:35:02.659914",
+    "review_required": true,
+    "disclaimer": "【重要免责声明】AI 输出仅作为工程量初稿参考，不作为最终造价成果，必须经过注册造价师人工复核后方可使用。"
+  }
+}

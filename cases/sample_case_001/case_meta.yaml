@@ -1,0 +1,45 @@
+# 案例元数据
+# 请填写此案例的基本信息
+
+case_id: sample_case_001
+case_name: "示例案例 - 某办公室装修工程（模板）"
+status: template  # template / in_progress / completed / archived
+
+project_info:
+  project_name: "（待填写）某办公楼 X 层装修改造工程"
+  project_location: "（待填写）省/市"
+  discipline: "装修工程"  # 土建工程 / 装修工程 / 安装工程 / 综合
+  floor_area_sqm: null  # 建筑面积（m²），待填写
+  floors: null  # 涉及楼层，待填写
+  contract_type: "（待填写）固定单价 / 固定总价 / 可调价"
+
+timeline:
+  created_date: "2026-05-18"
+  drawing_date: null  # 图纸日期，待填写
+  review_date: null   # 人工复核日期，待填写
+  completed_date: null
+
+participants:
+  cost_engineer: "（待填写）负责造价师"
+  reviewer: "（待填写）复核人"
+  project_manager: null
+
+input_files:
+  drawings: []        # 待放入 input/drawings/
+  boq: []             # 待放入 input/boq/
+  cad: []             # 待放入 input/cad/（预留）
+  other: []
+
+applicable_standards:
+  national: "GB 50500-2013（或最新版）"  # TODO: 确认适用版本
+  local: "（待填写）地方清单规范"
+  company_rules: "（待填写）"
+
+notes: |
+  这是一个模板案例，用于演示 cost-agent-poc 的功能。
+  实际使用时，请：
+  1. 将图纸 PDF 放入 input/drawings/
+  2. 将清单 Excel/CSV 放入 input/boq/
+  3. 在 input/project_instructions.md 中补充项目说明
+  4. 在 golden_answer/human_answer.json 中填写人工标准答案
+  5. 更新 case_meta.yaml 中的项目信息
