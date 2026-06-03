@@ -4,6 +4,8 @@ from skills.boq_check_skill import BOQCheckSkill
 from skills.variation_claim_skill import VariationClaimSkill
 from skills.glodon_integration_skill import GlodonIntegrationSkill
 from skills.evaluation_skill import EvaluationSkill
+from skills.drawing_boq_skill import DrawingBOQSkill
+from skills.drawing_recognition_skill import DrawingRecognitionSkill
 
 SKILL_REGISTRY = {
     "drawing_review": DrawingReviewSkill(),
@@ -12,6 +14,8 @@ SKILL_REGISTRY = {
     "variation_claim": VariationClaimSkill(),
     "glodon_integration": GlodonIntegrationSkill(),
     "evaluation": EvaluationSkill(),
+    "drawing_boq": DrawingBOQSkill(),
+    "drawing_recognition": DrawingRecognitionSkill(),
 }
 
 
