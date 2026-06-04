@@ -13,6 +13,20 @@
 | `drawing_recognition_rules.md` | 土建工程图纸识图与构件清单抽取规则——Agent 识图强制规则库（R01~R19）、各专业识别要点、置信度体系 | 2026-06-03 |
 | `local_rules_notes.md` | 各地方规范差异对照（TODO） | — |
 
+## 附件上传目录约定
+
+所有用户上传的附件统一存放于：
+
+```
+<PROJECT_ROOT>/.cc-connect/attachments/{yyyyMMdd_HHmmss}/
+```
+
+规则：
+1. 每次上传在 `.cc-connect/attachments/` 下创建一个以当前时间戳命名的新目录，格式为 `yyyyMMdd_HHmmss`（例：`20260604_143022`）。
+2. 本次上传的所有文件统一放入该目录，不与其他批次混用。
+3. 每次上传必须生成全新目录；同一秒内多次上传时，自动追加序号后缀（`_1`、`_2` ...）保证唯一。
+4. 该约定由 `skills/attachment_upload_skill.py` 中的 `AttachmentUploadSkill` 统一管理，任何涉及附件接收的代码必须通过该 skill 创建目录，禁止手动指定路径或复用旧目录。
+
 ## 文件使用说明
 
 ### gb50854_2013_rules.md

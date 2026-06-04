@@ -1,0 +1,219 @@
+{
+  "meta": {
+    "source_file": "A-01-101_01.png",
+    "source_path": "D:/cc-connect/cost-agent-poc/.cc-connect/attachments/20260604_152656/A-01-101_01.png",
+    "drawing_no": "A-01-101",
+    "drawing_name": "一层建筑平面图（含建筑设计总说明）",
+    "discipline": "建筑（A）",
+    "scale": "1:100",
+    "extraction_date": "2026-06-04",
+    "confidence_overall": "low-medium",
+    "note": "图纸分辨率有限，细部文字难以完整辨识，所有数值均为目视估读，需与原始CAD文件或PDF核对"
+  },
+  "title_block": {
+    "drawing_no": "A-01-101",
+    "sheet_no": "01",
+    "discipline": "建筑",
+    "scale": "1:100",
+    "design_unit": "（图纸右下角标题栏，分辨率不足，无法确认）",
+    "project_name": "（未能读取）"
+  },
+  "grid": {
+    "x_axes": ["1", "2", "3", "4"],
+    "y_axes": ["A", "B", "C", "D"],
+    "x_spans_mm": ["（未能量取）"],
+    "y_spans_mm": ["（未能量取）"],
+    "confidence": "low",
+    "note": "轴号根据平面图可见轴线数量估计，轴距需PDF或CAD核对"
+  },
+  "floors": [
+    {
+      "floor_id": "F1",
+      "floor_name": "一层",
+      "floor_elevation_m": "±0.000（推测）",
+      "floor_height_m": "（设计说明中未能读取）"
+    }
+  ],
+  "components": [
+    {
+      "id": "W-001",
+      "category": "墙体",
+      "type": "外墙",
+      "thickness_mm": 240,
+      "material": "（未能确认，常见为加气混凝土砌块或页岩砖）",
+      "grid_position": "周圈外墙",
+      "quantity_m": "（待量取）",
+      "confidence": "medium",
+      "note": "厚度根据平面图线宽估读为240mm，需核对设计说明"
+    },
+    {
+      "id": "W-002",
+      "category": "墙体",
+      "type": "内墙",
+      "thickness_mm": 120,
+      "material": "（未能确认）",
+      "grid_position": "内部分隔墙",
+      "quantity_m": "（待量取）",
+      "confidence": "low",
+      "note": "部分内墙线宽偏薄，估读120mm，不排除100mm或200mm，需核对"
+    },
+    {
+      "id": "W-003",
+      "category": "墙体",
+      "type": "卫生间隔墙",
+      "thickness_mm": 120,
+      "material": "（未能确认）",
+      "grid_position": "右上角卫生间区域",
+      "quantity_m": "（待量取）",
+      "confidence": "low",
+      "note": "卫生间区域可见小尺度隔墙，厚度不确定"
+    },
+    {
+      "id": "D-001",
+      "category": "门",
+      "type": "普通门",
+      "door_no": "M1（推测）",
+      "width_mm": "（未能读取）",
+      "height_mm": "（未能读取）",
+      "quantity": "（未统计）",
+      "grid_position": "各房间入口",
+      "confidence": "low",
+      "note": "平面图中可见多处门洞弧线符号，具体编号和规格需门窗表核对"
+    },
+    {
+      "id": "D-002",
+      "category": "门",
+      "type": "入口大门/双开门",
+      "door_no": "（未能读取）",
+      "width_mm": "（未能读取）",
+      "height_mm": "（未能读取）",
+      "quantity": 1,
+      "grid_position": "南侧或北侧主入口",
+      "confidence": "low",
+      "note": "图纸下方可见疑似主入口台阶与门廊，具体门型需核对"
+    },
+    {
+      "id": "W-C-001",
+      "category": "窗",
+      "type": "外窗",
+      "window_no": "（未能读取）",
+      "width_mm": "（未能读取）",
+      "height_mm": "（未能读取）",
+      "quantity": "（未统计）",
+      "grid_position": "外墙各开间",
+      "confidence": "low",
+      "note": "外墙可见多处窗洞，具体编号和规格需门窗表核对"
+    },
+    {
+      "id": "R-001",
+      "category": "房间",
+      "type": "功能房间（待确认）",
+      "room_name": "（未能读取）",
+      "area_m2": "（未能量取）",
+      "grid_position": "平面中部偏左上",
+      "confidence": "low",
+      "note": "房间内有彩色填充，疑为功能分区示意，名称文字未能辨识"
+    },
+    {
+      "id": "R-002",
+      "category": "房间",
+      "type": "卫生间",
+      "room_name": "卫生间",
+      "area_m2": "（未能量取）",
+      "grid_position": "右上角区域",
+      "confidence": "medium",
+      "note": "可见卫生洁具平面符号（坐便器、洗手台轮廓），确认为卫生间"
+    },
+    {
+      "id": "R-003",
+      "category": "房间",
+      "type": "走廊/门廊",
+      "room_name": "走廊（推测）",
+      "area_m2": "（未能量取）",
+      "grid_position": "外墙内侧周圈或中部通道",
+      "confidence": "low",
+      "note": "图纸中可见较宽通道区域，功能名称未能读取"
+    },
+    {
+      "id": "ST-001",
+      "category": "楼梯",
+      "type": "室内楼梯（推测）",
+      "width_mm": "（未能读取）",
+      "grid_position": "（未能确认）",
+      "confidence": "low",
+      "note": "图纸右侧区域疑似有楼梯间轮廓，需高清图或CAD核对"
+    },
+    {
+      "id": "OD-001",
+      "category": "室外构件",
+      "type": "台阶",
+      "step_count": "（未能读取）",
+      "grid_position": "主入口前",
+      "confidence": "low",
+      "note": "入口处可见台阶线，级数和宽度未能读取"
+    },
+    {
+      "id": "OD-002",
+      "category": "室外构件",
+      "type": "散水",
+      "width_mm": "（未能读取）",
+      "grid_position": "建筑周圈",
+      "confidence": "low",
+      "note": "外墙外侧疑似有散水线，宽度未能读取，常规为600-900mm"
+    }
+  ],
+  "design_notes_extracted": {
+    "raw_text": "（上部图框内含设计总说明，文字密集，在当前图纸分辨率下无法完整读取）",
+    "key_params_visible": [
+      "图纸上部黄色标注区域可见若干标注文字，具体内容无法辨识",
+      "平面图中可见绿色、粉色等彩色区域，推测为功能分区或材料示意"
+    ]
+  },
+  "unresolved_items": [
+    {
+      "item": "门窗表",
+      "description": "缺少独立门窗表，所有门窗编号、规格、数量均无法确认",
+      "priority": "高"
+    },
+    {
+      "item": "轴距尺寸",
+      "description": "图纸分辨率不足，轴线尺寸标注无法读取",
+      "priority": "高"
+    },
+    {
+      "item": "墙体材料做法",
+      "description": "设计说明文字无法辨识，外墙/内墙材料和厚度无法确认",
+      "priority": "高"
+    },
+    {
+      "item": "房间名称与面积",
+      "description": "各房间名称文字在当前分辨率下无法读取，面积无法量取",
+      "priority": "高"
+    },
+    {
+      "item": "楼层标高",
+      "description": "一层地面标高及层高未能从图纸中读取",
+      "priority": "中"
+    },
+    {
+      "item": "楼梯位置与形式",
+      "description": "楼梯间位置不确定，是否有楼梯需高清图确认",
+      "priority": "中"
+    },
+    {
+      "item": "散水宽度",
+      "description": "外墙散水宽度未能读取",
+      "priority": "低"
+    },
+    {
+      "item": "柱截面",
+      "description": "平面图中未能识别明显的独立柱截面轮廓，无法确认是否有柱及其截面尺寸",
+      "priority": "中"
+    },
+    {
+      "item": "设计单位/项目名称",
+      "description": "标题栏信息在当前分辨率下无法读取",
+      "priority": "低"
+    }
+  ]
+}

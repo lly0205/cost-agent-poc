@@ -6,6 +6,7 @@ from skills.glodon_integration_skill import GlodonIntegrationSkill
 from skills.evaluation_skill import EvaluationSkill
 from skills.drawing_boq_skill import DrawingBOQSkill
 from skills.drawing_recognition_skill import DrawingRecognitionSkill
+from skills.attachment_upload_skill import AttachmentUploadSkill
 
 SKILL_REGISTRY = {
     "drawing_review": DrawingReviewSkill(),
@@ -16,6 +17,7 @@ SKILL_REGISTRY = {
     "evaluation": EvaluationSkill(),
     "drawing_boq": DrawingBOQSkill(),
     "drawing_recognition": DrawingRecognitionSkill(),
+    "attachment_upload": AttachmentUploadSkill(),
 }
 
 

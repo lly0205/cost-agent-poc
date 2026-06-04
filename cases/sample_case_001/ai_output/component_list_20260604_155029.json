@@ -1,0 +1,468 @@
+{
+  "meta": {
+    "project_id": "sample_case_001",
+    "drawing_package_version": "未知（单张图纸，无图纸目录）",
+    "batch_id": "20260604_155029",
+    "source_file": "D:\\cc-connect\\cost-agent-poc\\.cc-connect\\attachments\\20260604_155029\\img_1780558643896_0.jpg",
+    "recognition_rule_version": "drawing_recognition_rules.md V1.0 (2026-06-02)",
+    "recognition_date": "2026-06-04",
+    "analyst": "cost-ai Agent (claude-sonnet-4-6)",
+    "scan_quality": "低（JPG扫描件，分辨率受限，OCR能力有限）",
+    "note": "本次识别受图纸分辨率限制，所有构件均为候选/初判，置信度上限0.60，须经注册造价师人工复核后方可用于计量"
+  },
+  "drawing_context": {
+    "layout": "单页两图（上图+下图）",
+    "upper_drawing": {
+      "content": "设计说明页 + 图例 + 小型示意图",
+      "discipline": "建筑（推断）",
+      "sheet_id": "不可读",
+      "sheet_name": "设计说明/图例（推断）",
+      "scale": "不可读",
+      "confidence": 0.45
+    },
+    "lower_drawing": {
+      "content": "建筑平面图 + 立面/剖面/详图（若干小图）",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断，具体楼层不可读）",
+      "scale": "不可读",
+      "floor_level": "不可读",
+      "confidence": 0.45,
+      "axis_grid": {
+        "longitudinal_axes": "不可读（估3～5根）",
+        "lateral_axes": "不可读（估3～5根）",
+        "axis_spacing": "不可读",
+        "evidence": "视觉推断（点划线网格）",
+        "confidence": 0.35
+      }
+    }
+  },
+  "components": [
+    {
+      "component_uid": "WAL-EXT-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "建筑平面图周边（外围）",
+      "component_category": "墙体",
+      "component_name": "外墙",
+      "component_id": "WAL-EXT-01",
+      "specification": {
+        "size": "厚度不可读，估240mm（待设计说明确认）",
+        "material": "不可读（待设计说明确认）",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "m",
+        "calc_basis": "视觉识别平面轮廓，尺寸不可量算",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "砌筑工程-砖墙 或 混凝土及钢筋混凝土工程-墙（待材质确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（视觉识别）",
+          "text": "平面图周边可见双线围合轮廓，推断为外墙"
+        }
+      ],
+      "confidence": 0.45,
+      "warnings": [
+        "扫描图低分辨率，厚度不可读，仅凭视觉推断，R06规则降低置信度",
+        "材质不可确认，无设计说明可读",
+        "R-ARC-02：外墙厚度必须来自尺寸标注或设计说明，当前无法读取，标注为待确认",
+        "数量不可量算，需高分辨率图纸或CAD文件"
+      ]
+    },
+    {
+      "component_uid": "WAL-INT-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "建筑平面图内部",
+      "component_category": "墙体",
+      "component_name": "内墙/隔墙",
+      "component_id": "WAL-INT-01",
+      "specification": {
+        "size": "厚度不可读，候选100/120/200mm（待标注确认）",
+        "material": "不可读",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "m",
+        "calc_basis": "视觉识别，尺寸不可量算",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "砌筑工程-砖墙 或 轻质隔墙（待材质确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（视觉识别）",
+          "text": "平面图内部多条双线，推断为内墙/隔墙"
+        }
+      ],
+      "confidence": 0.40,
+      "warnings": [
+        "R-ARC-03：隔墙厚度无标注，置信度降至0.50以下",
+        "内外墙区分依赖高分辨率图纸",
+        "数量、轴线位置均不可读取"
+      ]
+    },
+    {
+      "component_uid": "RM-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "平面图左侧区域",
+      "component_category": "房间/功能分区",
+      "component_name": "功能房间（粉色填充区域）",
+      "component_id": "RM-01",
+      "specification": {
+        "size": "面积不可量算",
+        "material": "不可读",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "m²",
+        "calc_basis": "彩色填充区域视觉识别，净面积不可量算",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "楼地面工程（待房间名称和做法确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（彩色填充）",
+          "text": "平面图左侧粉色填充区域，推断为功能房间分区示意"
+        }
+      ],
+      "confidence": 0.40,
+      "warnings": [
+        "R-ARC-08：彩色区域为功能分区示意，不直接等同于地面做法，须结合做法表确认",
+        "房间名称不可读",
+        "做法表不可读，无法确认地面/墙面/天棚做法"
+      ]
+    },
+    {
+      "component_uid": "RM-02",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "平面图右侧区域",
+      "component_category": "房间/功能分区",
+      "component_name": "功能房间（绿色填充区域）",
+      "component_id": "RM-02",
+      "specification": {
+        "size": "面积不可量算",
+        "material": "不可读",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "m²",
+        "calc_basis": "彩色填充区域视觉识别，净面积不可量算",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "楼地面工程（待房间名称和做法确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（彩色填充）",
+          "text": "平面图右侧绿色填充区域，推断为功能房间分区示意"
+        }
+      ],
+      "confidence": 0.40,
+      "warnings": [
+        "R-ARC-08：彩色区域为功能分区示意，不直接等同于地面做法，须结合做法表确认",
+        "房间名称不可读",
+        "做法表不可读"
+      ]
+    },
+    {
+      "component_uid": "STR-CAND-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "平面图内部（位置不确定）",
+      "component_category": "楼梯",
+      "component_name": "楼梯（候选，未确认）",
+      "component_id": "STR-CAND-01",
+      "specification": {
+        "size": "宽度/级数不可读",
+        "material": "不可读",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "处",
+        "calc_basis": "视觉形态推断，不满足R-ARC-05三证据条件",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "楼梯工程（待确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（视觉推断）",
+          "text": "疑似踏步线形态，OCR/目视推断，待核实"
+        }
+      ],
+      "confidence": 0.35,
+      "warnings": [
+        "R-ARC-05：未同时观察到踏步线+上行箭头+剖断线，不能确认为楼梯",
+        "极低置信度，不参与正式数量汇总",
+        "需人工复核高分辨率图纸"
+      ]
+    },
+    {
+      "component_uid": "COL-CAND-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "轴线交点处（估计）",
+      "component_category": "柱",
+      "component_name": "柱（候选，未确认）",
+      "component_id": "COL-CAND-01",
+      "specification": {
+        "size": "截面不可读，候选矩形截面",
+        "material": "不可读",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "根",
+        "calc_basis": "视觉识别轴线交点小方块，无柱表支撑",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "混凝土及钢筋混凝土工程-柱（待确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（视觉推断）",
+          "text": "轴线交点疑似小方块，OCR/目视推断，待核实"
+        }
+      ],
+      "confidence": 0.35,
+      "warnings": [
+        "无柱表可读，截面尺寸不可确认",
+        "R-ARC-06：柱截面须来自柱表或平面标注，当前均不可读",
+        "极低置信度，不参与正式数量汇总",
+        "注意：建筑图中柱可能属于结构专业，不应在建筑清单重复计量"
+      ]
+    },
+    {
+      "component_uid": "DOOR-CAND-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "外墙/内墙洞口（位置不确定）",
+      "component_category": "门",
+      "component_name": "门（候选，未确认）",
+      "component_id": "DOOR-CAND-01",
+      "specification": {
+        "size": "宽度/高度不可读",
+        "material": "不可读",
+        "grade": "防火等级不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "樘",
+        "calc_basis": "洞口位置视觉推断，无门窗表支撑",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "门窗工程-木门/钢门/防火门（待确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（视觉推断）",
+          "text": "墙上洞口位置视觉推断，OCR/目视推断，待核实"
+        }
+      ],
+      "confidence": 0.35,
+      "warnings": [
+        "R-ARC-04：无门窗表可读，门宽/高均不可确认",
+        "M编号不可读，不能确认门的类型",
+        "极低置信度，不参与正式数量汇总"
+      ]
+    },
+    {
+      "component_uid": "WIN-CAND-01",
+      "discipline": "建筑",
+      "sheet_id": "不可读",
+      "sheet_name": "建筑平面图（推断）",
+      "view_type": "平面",
+      "floor_level": "不可读",
+      "axis_location": "外墙洞口（位置不确定）",
+      "component_category": "窗",
+      "component_name": "窗（候选，未确认）",
+      "component_id": "WIN-CAND-01",
+      "specification": {
+        "size": "宽度/高度不可读",
+        "material": "不可读",
+        "grade": "不可读",
+        "installation": "不可读"
+      },
+      "quantity_preliminary": {
+        "value": null,
+        "unit": "樘",
+        "calc_basis": "外墙洞口位置视觉推断，无门窗表支撑",
+        "is_final": false
+      },
+      "boq_mapping": {
+        "standard": "GB/T50854-2024",
+        "candidate_chapter_or_item": "门窗工程-铝合金窗/塑钢窗（待确认）",
+        "suggested_code": null,
+        "needs_human_confirmation": true
+      },
+      "evidence": [
+        {
+          "type": "几何形态",
+          "source": "下图建筑平面图（视觉推断）",
+          "text": "外墙洞口位置视觉推断，OCR/目视推断，待核实"
+        }
+      ],
+      "confidence": 0.35,
+      "warnings": [
+        "R-ARC-04：无门窗表可读，窗宽/高均不可确认",
+        "C编号不可读，不能确认窗的类型",
+        "极低置信度，不参与正式数量汇总"
+      ]
+    }
+  ],
+  "recognition_statistics": {
+    "total_components": 8,
+    "high_confidence_count": 0,
+    "medium_confidence_count": 0,
+    "low_confidence_count": 3,
+    "very_low_confidence_count": 5,
+    "unresolved_questions_count": 8
+  },
+  "unresolved_questions": [
+    {
+      "q_id": "Q01",
+      "category": "图纸元数据",
+      "description": "图名、图号、比例均不可读（扫描分辨率低），无法确认楼层、视图类型",
+      "impact": "所有构件的楼层定位和典型层展开无法执行",
+      "resolution": "提供高分辨率图纸扫描件（建议≥300dpi）或CAD原文件"
+    },
+    {
+      "q_id": "Q02",
+      "category": "轴网",
+      "description": "轴线编号和轴距不可读，构件无法绑定到轴网坐标",
+      "impact": "所有构件的轴线位置字段为空，跨图合并不可执行",
+      "resolution": "提供清晰轴网标注或CAD文件"
+    },
+    {
+      "q_id": "Q03",
+      "category": "设计说明",
+      "description": "上图设计说明文字块内容不可读（黄色文字在低分辨率下无法OCR）",
+      "impact": "外墙材质、内墙材质、楼面做法、屋面做法等关键参数均无法确认",
+      "resolution": "单独提供设计说明页高清图片或PDF文字版"
+    },
+    {
+      "q_id": "Q04",
+      "category": "门窗表",
+      "description": "无门窗表可读（可能在其他图纸页），所有门窗尺寸不可确认",
+      "impact": "门窗数量、规格、防火等级均无法列入清单",
+      "resolution": "提供门窗表页面或建筑说明中的门窗统计"
+    },
+    {
+      "q_id": "Q05",
+      "category": "外墙厚度",
+      "description": "外墙厚度无标注可读，依R-ARC-02候选值240mm",
+      "impact": "外墙砌体体积计量误差较大",
+      "resolution": "确认设计说明中的外墙材质和厚度"
+    },
+    {
+      "q_id": "Q06",
+      "category": "房间功能",
+      "description": "彩色填充区域（粉色/绿色）的房间名称不可读，无法绑定到做法表",
+      "impact": "地面、墙面、天棚做法均无法确认",
+      "resolution": "提供房间名称标注清晰的图纸或装修表"
+    },
+    {
+      "q_id": "Q07",
+      "category": "楼梯确认",
+      "description": "疑似楼梯区域未能同时识别踏步线+上行箭头+剖断线",
+      "impact": "楼梯是否存在及位置不确定",
+      "resolution": "提供高分辨率图纸，或提供楼梯详图/剖面图"
+    },
+    {
+      "q_id": "Q08",
+      "category": "图纸完整性",
+      "description": "本次仅有单张JPG（上下两图），不确定是否为完整图纸包；下图右侧小图（疑似立面/剖面/详图）内容不可识别",
+      "impact": "立面图高度信息、剖面图层高信息、详图做法信息均缺失",
+      "resolution": "提供完整图纸目录和全套图纸文件（PDF或CAD）"
+    }
+  ],
+  "audit_checklist": {
+    "R01_图纸目录和设计说明": "未通过——无图纸目录，设计说明不可读",
+    "R02_标题栏图名专业版本比例楼层视图类型": "未通过——图名、比例、楼层不可读",
+    "R03_未识别专业前不解释线条": "通过——已推断建筑专业后才提取构件",
+    "R04_项目图例说明优先": "N/A——图例和说明不可读，已在疑问项标注",
+    "R06_扫描图置信度降低": "通过——所有构件置信度上限0.60，极低置信度构件均标注为候选",
+    "R12_输出证据来源和置信度": "通过",
+    "R15_数量标为初判待审核": "通过",
+    "R19_识别统计摘要": "通过",
+    "R_ARC_02_外墙厚度": "未通过——不可读，已列入疑问项Q05",
+    "R_ARC_04_门窗统计规则": "未通过——无门窗表，已列入疑问项Q04",
+    "R_ARC_05_楼梯三证据": "未通过——楼梯仅为候选，已列入疑问项Q07",
+    "R_ARC_08_房间面积与做法绑定": "未通过——房间名称和做法表不可读，已列入疑问项Q06"
+  }
+}
