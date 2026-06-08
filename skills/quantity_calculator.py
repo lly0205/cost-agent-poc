@@ -292,6 +292,187 @@ def masonry_wall_volume(
 
 
 # ─────────────────────────────────────────────
+# 基础工程计算（垫层、承台、基础梁模板）
+# 规则来源：D01#~D04# 实操总结，2026-06-08
+# ─────────────────────────────────────────────
+
+def calc_cushion_volume(
+    foundation_width_mm: float,
+    span_m: float,
+    count: int,
+    extend_mm: float = 100.0,
+    thickness_mm: float = 100.0,
+) -> dict:
+    """
+    梁下垫层体积（m³）。
+    foundation_width_mm: 基础梁宽（mm）
+    span_m: 梁净跨（m）
+    count: 根数×栋数
+    extend_mm: 每边外扩量（默认100mm）
+    thickness_mm: 垫层厚度（默认100mm）
+    """
+    cushion_width_m = (foundation_width_mm + extend_mm * 2) / 1000
+    thickness_m = thickness_mm / 1000
+    vol = round(cushion_width_m * span_m * thickness_m * count, 4)
+    return {
+        "foundation_width_mm": foundation_width_mm,
+        "cushion_width_m": cushion_width_m,
+        "span_m": span_m,
+        "thickness_m": thickness_m,
+        "count": count,
+        "volume_m3": vol,
+        "formula": f"{cushion_width_m}×{span_m}×{thickness_m}×{count} = {vol} m³",
+    }
+
+
+def calc_footing_cushion_volume(
+    length_mm: float,
+    width_mm: float,
+    count: int,
+    extend_mm: float = 100.0,
+    thickness_mm: float = 100.0,
+) -> dict:
+    """
+    承台下垫层体积（m³）。每边外扩 extend_mm。
+    """
+    l = (length_mm + extend_mm * 2) / 1000
+    w = (width_mm + extend_mm * 2) / 1000
+    t = thickness_mm / 1000
+    vol = round(l * w * t * count, 4)
+    return {
+        "cushion_length_m": l,
+        "cushion_width_m": w,
+        "thickness_m": t,
+        "count": count,
+        "volume_m3": vol,
+        "formula": f"{l}×{w}×{t}×{count} = {vol} m³",
+    }
+
+
+def calc_cushion_formwork(
+    span_m: float,
+    count: int,
+    thickness_mm: float = 100.0,
+) -> dict:
+    """
+    梁下垫层侧面模板（m²）。两长侧面，端头不计。
+    """
+    t = thickness_mm / 1000
+    area = round(2 * span_m * t * count, 4)
+    return {
+        "span_m": span_m,
+        "thickness_m": t,
+        "count": count,
+        "area_m2": area,
+        "formula": f"2×{span_m}×{t}×{count} = {area} m²",
+    }
+
+
+def calc_footing_cushion_formwork(
+    length_mm: float,
+    width_mm: float,
+    count: int,
+    extend_mm: float = 100.0,
+    thickness_mm: float = 100.0,
+) -> dict:
+    """
+    承台下垫层四侧面模板（m²）。
+    """
+    l = (length_mm + extend_mm * 2) / 1000
+    w = (width_mm + extend_mm * 2) / 1000
+    t = thickness_mm / 1000
+    area = round((l + w) * 2 * t * count, 4)
+    return {
+        "cushion_length_m": l,
+        "cushion_width_m": w,
+        "thickness_m": t,
+        "count": count,
+        "area_m2": area,
+        "formula": f"({l}+{w})×2×{t}×{count} = {area} m²",
+    }
+
+
+def calc_footing_formwork(
+    length_mm: float,
+    width_mm: float,
+    height_mm: float,
+    count: int,
+) -> dict:
+    """
+    承台四侧面模板（m²）。按侧面粘灰面计算。
+    """
+    l = length_mm / 1000
+    w = width_mm / 1000
+    h = height_mm / 1000
+    area = round((l + w) * 2 * h * count, 4)
+    return {
+        "length_m": l,
+        "width_m": w,
+        "height_m": h,
+        "count": count,
+        "area_m2": area,
+        "formula": f"({l}+{w})×2×{h}×{count} = {area} m²",
+    }
+
+
+def calc_beam_formwork(
+    beam_h_mm: float,
+    span_m: float,
+    count: int,
+    beam_w_mm: float = 0.0,
+    is_foundation: bool = True,
+) -> dict:
+    """
+    梁模板面积（m²）。
+    is_foundation=True  → 基础梁：仅两侧面 = 梁高×2×净跨×根数
+    is_foundation=False → 楼层/屋面梁：三面 = (梁高×2+梁宽)×净跨×根数
+    """
+    h = beam_h_mm / 1000
+    w = beam_w_mm / 1000
+    if is_foundation:
+        perimeter = h * 2
+        sides = "两侧面"
+    else:
+        if beam_w_mm <= 0:
+            raise ValueError("楼层梁/屋面梁需传入 beam_w_mm（梁宽）")
+        perimeter = h * 2 + w
+        sides = "三面（底+两侧）"
+    area = round(perimeter * span_m * count, 4)
+    return {
+        "beam_h_m": h,
+        "beam_w_m": w,
+        "span_m": span_m,
+        "count": count,
+        "is_foundation": is_foundation,
+        "sides": sides,
+        "area_m2": area,
+        "formula": f"{perimeter:.3f}×{span_m}×{count} = {area} m²  ({sides})",
+    }
+
+
+def get_beam_type(floor_has_basement: bool) -> str:
+    """
+    根据是否有地下室返回一层梁类型。
+    无地下室 → 基础梁（010503001）
+    有地下室 → 楼层梁（010503002）
+    """
+    return "基础梁（010503001）" if not floor_has_basement else "楼层梁（010503002）"
+
+
+def parse_span_count(beam_label: str) -> tuple[int, bool]:
+    """
+    从集中标注解析跨数。
+    如 'KL1(2)' → (2, True)；'KL1' → (1, False)
+    返回 (跨数, 是否明确标注)
+    """
+    import re
+    m = re.search(r'\((\d+)\)', beam_label)
+    if m:
+        return int(m.group(1)), True
+    return 1, False
+
+
+# ─────────────────────────────────────────────
 # 面积类（通用）
 # ─────────────────────────────────────────────
 
