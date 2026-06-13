@@ -1,0 +1,137 @@
+ENTITIES区段: 行1677698 ~ 行2545948
+
+=== 所有图层（87个）===
+  0
+  10
+  1005
+  4
+  41
+  53
+  70
+  71
+  72
+  AXIS
+  AXIS_DE
+  AXIS_TEXT
+  BEAM
+  BEAM_CON
+  BORDER
+  COLU
+  COLU_DE_TH-pdx
+  COLU_DIM
+  DIM
+  DIM_SYMB
+  DOTE
+  E-hatch  250
+  FLOOR_DOWN_TEXT
+  FLOOR_REIN
+  FLOOR_UP_REIN
+  FLOOR_UP_TEXT
+  FOUNDATION
+  FOUNDATION_DIM
+  FOUNDATION_TXT
+  HATCH
+  NUM
+  PILE
+  PIPE-循环
+  PUB_TEXT
+  REIN
+  REINL
+  SX-JGZSM-KJ$0$S-BARS
+  SX-JGZSM-KJ$0$S-DY
+  SX-JGZSM-KJ$0$S-NOTE
+  S_DETL_TEXT
+  S_DETL_THIN
+  S_DETL_TOPC
+  S_PLAN_TEXT
+  S_PLAN_TOPC
+  TAB
+  TEXT
+  THIN
+  WCOL_DE_REINL
+  中海单体设计总说明花$0$文字2
+  图块
+  图签字体
+  垫层
+  基础详图
+  基础集中标注
+  总说明文字
+  承台基础
+  承台集中标注
+  施工图板区边界
+  板洞边线
+  柱原位标注
+  柱尺寸标注
+  柱截面轮廓
+  柱标注引线
+  柱箍筋
+  柱纵筋
+  柱表文字
+  柱表边线
+  柱集中标注
+  桩
+  梁原位标注
+  梁名称编号
+  梁标注引线
+  梁附加吊筋
+  梁附加吊筋标注
+  梁集中标注
+  楼板正筋文字
+  楼板正筋钢筋
+  楼板负筋文字
+  楼板负筋标注
+  楼板负筋钢筋
+  看线
+  砼墙
+  立剖外轮廓线
+  表格文字
+  钢筋
+  集水坑
+  需要设计单位填写内容
+
+=== 柱相关图层分析 ===
+柱相关图层: ['柱纵筋', 'COLU', '柱表文字', '柱标注引线', '柱表边线', '柱箍筋', 'COLU_DIM', '柱原位标注', '柱集中标注', '柱尺寸标注', '柱截面轮廓', 'COLU_DE_TH-pdx']
+墙相关图层: []
+基础/筏板相关图层: ['FLOOR_UP_TEXT', 'FOUNDATION_TXT', 'FOUNDATION', 'FOUNDATION_DIM', 'FLOOR_UP_REIN', 'FLOOR_DOWN_TEXT', 'FLOOR_REIN']
+
+=== 扫描实体 ===
+柱实体数: 1975
+墙实体数: 0
+FOUNDATION HATCH数: 0
+
+=== 各图层实体类型统计（柱/墙/基础相关）===
+  图层[COLU]: {'LWPOLYLINE': 637, 'INSERT': 2}
+  图层[COLU_DE_TH-pdx]: {'LWPOLYLINE': 5}
+  图层[COLU_DIM]: {'DIMENSION': 328}
+  图层[FLOOR_DOWN_TEXT]: {'TEXT': 5}
+  图层[FLOOR_REIN]: {'LWPOLYLINE': 5}
+  图层[FLOOR_UP_REIN]: {'LWPOLYLINE': 6}
+  图层[FLOOR_UP_TEXT]: {'TEXT': 6}
+  图层[FOUNDATION]: {'LWPOLYLINE': 4, 'LINE': 3}
+  图层[FOUNDATION_DIM]: {'DIMENSION': 5}
+  图层[FOUNDATION_TXT]: {'LWPOLYLINE': 2, 'TEXT': 2}
+  图层[柱原位标注]: {'TEXT': 114}
+  图层[柱尺寸标注]: {'DIMENSION': 114}
+  图层[柱截面轮廓]: {'LWPOLYLINE': 57}
+  图层[柱标注引线]: {'LINE': 82}
+  图层[柱箍筋]: {'LWPOLYLINE': 380}
+  图层[柱纵筋]: {'LWPOLYLINE': 894}
+  图层[柱表文字]: {'TEXT': 253}
+  图层[柱表边线]: {'LINE': 1090}
+  图层[柱集中标注]: {'TEXT': 82}
+
+=== 柱实体样本（前10个）===
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1684946, 2: '100', 43: '0.0', 10: '-4779095.090241324', 20: '113910.1121834166'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1684998, 2: '100', 43: '0.0', 10: '-4770695.090241324', 20: '113910.1121834166'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685050, 2: '100', 43: '0.0', 10: '-4762395.090241324', 20: '113910.1121834166'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685102, 2: '100', 43: '0.0', 10: '-4753995.090241324', 20: '113910.1121834166'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685154, 2: '100', 43: '0.0', 10: '-4745395.090241323', 20: '66910.1121834165'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685206, 2: '100', 43: '0.0', 10: '-4812695.090241324', 20: '67010.11218341649'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685258, 2: '100', 43: '0.0', 10: '-4779095.090241324', 20: '107910.1121834165'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685310, 2: '100', 43: '0.0', 10: '-4804295.090241324', 20: '66910.1121834165'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685362, 2: '100', 43: '0.0', 10: '-4745545.090241324', 20: '107910.1121834165'}
+  {'type': 'LWPOLYLINE', 'layer': 'COLU', 'line': 1685414, 2: '100', 43: '0.0', 10: '-4737145.090241324', 20: '107910.1121834165'}
+
+=== 墙实体样本（前10个）===
+
+=== FOUNDATION HATCH样本（前3个）===
