@@ -309,7 +309,8 @@ def calc_cushion_volume(
     span_m: 梁净跨（m）
     count: 根数×栋数
     extend_mm: 每边外扩量（默认100mm）
-    thickness_mm: 垫层厚度（默认100mm）
+    thickness_mm: ⚠️ 必须从图纸设计说明取值，不得使用默认值100mm
+                  无地下室单体通常100mm C20；筏板/地下室通常150mm C15
     """
     cushion_width_m = (foundation_width_mm + extend_mm * 2) / 1000
     thickness_m = thickness_mm / 1000
@@ -334,6 +335,7 @@ def calc_footing_cushion_volume(
 ) -> dict:
     """
     承台下垫层体积（m³）。每边外扩 extend_mm。
+    thickness_mm: ⚠️ 必须从图纸设计说明取值，不得使用默认值100mm
     """
     l = (length_mm + extend_mm * 2) / 1000
     w = (width_mm + extend_mm * 2) / 1000
@@ -356,6 +358,7 @@ def calc_cushion_formwork(
 ) -> dict:
     """
     梁下垫层侧面模板（m²）。两长侧面，端头不计。
+    thickness_mm: ⚠️ 必须与垫层实际厚度一致，不得默认100mm
     """
     t = thickness_mm / 1000
     area = round(2 * span_m * t * count, 4)
@@ -447,6 +450,292 @@ def calc_beam_formwork(
         "sides": sides,
         "area_m2": area,
         "formula": f"{perimeter:.3f}×{span_m}×{count} = {area} m²  ({sides})",
+    }
+
+
+def calc_pile_cap_in_raft(
+    cap_l_mm: float,
+    cap_w_mm: float,
+    cap_h_total_mm: float,
+    raft_thickness_mm: float,
+    count: int,
+) -> dict:
+    """
+    筏板+承台组合中承台体积（m³）。R11规则：仅计筏板底以下部分。
+    cap_h_total_mm: 承台详图总高（mm）
+    raft_thickness_mm: 筏板厚度（mm）
+    计算高度 = cap_h_total_mm − raft_thickness_mm
+    """
+    h = (cap_h_total_mm - raft_thickness_mm) / 1000
+    if h <= 0:
+        raise ValueError(
+            f"承台有效高度为负（{h:.3f}m），请检查承台总高{cap_h_total_mm}mm是否大于筏板厚{raft_thickness_mm}mm"
+        )
+    l = cap_l_mm / 1000
+    w = cap_w_mm / 1000
+    vol = round(l * w * h * count, 4)
+    return {
+        "cap_length_m": l,
+        "cap_width_m": w,
+        "cap_total_height_mm": cap_h_total_mm,
+        "raft_thickness_mm": raft_thickness_mm,
+        "effective_height_m": h,
+        "count": count,
+        "volume_m3": vol,
+        "formula": f"{l}×{w}×({cap_h_total_mm/1000:.3f}−{raft_thickness_mm/1000:.3f})×{count} = {vol} m³",
+        "note": "R11: 仅计筏板底以下，H=详图总高−筏板厚",
+    }
+
+
+def calc_sump_concrete(
+    inner_l_mm: float,
+    inner_w_mm: float,
+    inner_depth_mm: float,
+    slab_thickness_mm: float,
+    count: int,
+    edge_dist_mm: float = None,
+) -> dict:
+    """
+    集水坑（坑中坑）混凝土体积（m³）。R12规则。
+    inner_l_mm / inner_w_mm: 坑内净空平面尺寸（mm）
+    inner_depth_mm: 净坑深（mm，自筏板顶面向下）
+    slab_thickness_mm: 所在板厚（mm），默认出边距 = 板厚
+    edge_dist_mm: 出边距（mm），None时默认=slab_thickness_mm
+    外框 = 内净空 + 2×出边距；外框总深 = 净坑深 + 板厚
+    """
+    edge = edge_dist_mm if edge_dist_mm is not None else slab_thickness_mm
+    outer_l = (inner_l_mm + 2 * edge) / 1000
+    outer_w = (inner_w_mm + 2 * edge) / 1000
+    outer_d = (inner_depth_mm + slab_thickness_mm) / 1000
+    il = inner_l_mm / 1000
+    iw = inner_w_mm / 1000
+    id_ = inner_depth_mm / 1000
+    outer_vol = round(outer_l * outer_w * outer_d, 4)
+    inner_vol = round(il * iw * id_, 4)
+    net_vol = round((outer_vol - inner_vol) * count, 4)
+    return {
+        "inner_l_m": il,
+        "inner_w_m": iw,
+        "inner_depth_m": id_,
+        "edge_dist_mm": edge,
+        "outer_l_m": outer_l,
+        "outer_w_m": outer_w,
+        "outer_total_depth_m": outer_d,
+        "count": count,
+        "outer_volume_m3": outer_vol,
+        "inner_volume_m3": inner_vol,
+        "net_volume_m3": net_vol,
+        "formula": (
+            f"({outer_l}×{outer_w}×{outer_d}−{il}×{iw}×{id_})×{count} = {net_vol} m³"
+        ),
+        "note": "R12: 外框总深=净坑深+板厚；出边距默认=板厚",
+    }
+
+
+def calc_sump_formwork(
+    inner_l_mm: float,
+    inner_w_mm: float,
+    outer_total_depth_mm: float,
+    count: int,
+) -> dict:
+    """
+    集水坑模板（m²）。R12规则：立面高度=外框总深（非净坑深）。
+    inner_l_mm / inner_w_mm: 坑内净空平面尺寸
+    outer_total_depth_mm: 外框总深 = 净坑深 + 板厚（⚠️ 必须传外框总深）
+    """
+    il = inner_l_mm / 1000
+    iw = inner_w_mm / 1000
+    d = outer_total_depth_mm / 1000
+    perimeter = (il + iw) * 2
+    side_area = round(perimeter * d * count, 4)
+    bottom_area = round(il * iw * count, 4)
+    total_area = round(side_area + bottom_area, 4)
+    return {
+        "inner_l_m": il,
+        "inner_w_m": iw,
+        "outer_total_depth_m": d,
+        "count": count,
+        "side_area_m2": side_area,
+        "bottom_area_m2": bottom_area,
+        "total_area_m2": total_area,
+        "formula_side": f"({il}+{iw})×2×{d}×{count} = {side_area} m²",
+        "formula_bottom": f"{il}×{iw}×{count} = {bottom_area} m²",
+        "note": "R12: 立面高度=外框总深（净坑深+板厚），非净坑深",
+    }
+
+
+def calc_raft_formwork(
+    perimeter_m: float,
+    slab_thickness_m: float,
+    step_length_m: float = 0.0,
+    step_height_diff_m: float = 0.0,
+) -> dict:
+    """
+    筏板外侧模板+踏步模板（m²）。R14规则。
+    perimeter_m: 筏板外周长（m）
+    slab_thickness_m: 板厚（m），用于外侧模高度
+    step_length_m: 深浅区交界线长度（m），无踏步时传0
+    step_height_diff_m: 深浅区高差（m），无踏步时传0
+    踏步45°斜坡斜长 = √2 × 高差（45°放坡时）
+    """
+    outer_side = round(perimeter_m * slab_thickness_m, 4)
+    step_vertical = round(step_length_m * slab_thickness_m, 4)
+    step_slope = round(step_length_m * math.sqrt(2) * step_height_diff_m, 4) if step_height_diff_m > 0 else 0.0
+    total = round(outer_side + step_vertical + step_slope, 4)
+    return {
+        "perimeter_m": perimeter_m,
+        "slab_thickness_m": slab_thickness_m,
+        "step_length_m": step_length_m,
+        "step_height_diff_m": step_height_diff_m,
+        "outer_side_m2": outer_side,
+        "step_vertical_m2": step_vertical,
+        "step_slope_m2": step_slope,
+        "total_m2": total,
+        "formula": (
+            f"外侧: {perimeter_m}×{slab_thickness_m}={outer_side}; "
+            f"踏步立面: {step_length_m}×{slab_thickness_m}={step_vertical}; "
+            f"踏步斜面: {step_length_m}×√2×{step_height_diff_m}={step_slope}; "
+            f"合计={total} m²"
+        ),
+    }
+
+
+@dataclass
+class RetainingWallSegment:
+    """挡土墙段数据"""
+    code: str          # 墙型编号，如 DWQ1
+    length_m: float    # 段长（m）
+    height_m: float    # 计算高度（m）
+    thickness_m: float # 墙厚（m）
+    count: int = 1     # 段数
+    has_brick_mold: bool = False  # 该侧是否为砖胎模（砖胎模侧不计模板）
+
+
+def calc_retaining_wall_volume(segments: list[RetainingWallSegment]) -> dict:
+    """
+    挡土墙分组混凝土体积汇总（m³）。R16规则：按墙型分组。
+    附墙柱体积需在调用方单独计算后加入合计（R13）。
+    """
+    detail = {}
+    total = 0.0
+    for s in segments:
+        vol = round(s.length_m * s.height_m * s.thickness_m * s.count, 4)
+        detail[s.code] = {
+            "length_m": s.length_m,
+            "height_m": s.height_m,
+            "thickness_m": s.thickness_m,
+            "count": s.count,
+            "volume_m3": vol,
+            "formula": f"{s.length_m}×{s.height_m}×{s.thickness_m}×{s.count} = {vol} m³",
+        }
+        total += vol
+    return {
+        "segments": detail,
+        "total_volume_m3": round(total, 4),
+        "note": "R13: 附墙柱体积需另加；R16: 按墙型分组统计",
+    }
+
+
+def calc_column_formwork(
+    perimeters_m: list[float],
+    heights_m: list[float],
+    counts: list[int],
+    beam_contact_area_m2: float = 0.0,
+) -> dict:
+    """
+    框架柱模板面积（m²），扣除梁板接触面积。
+    perimeters_m: 各规格柱截面周长列表（m）
+    heights_m: 各规格柱净高列表（m）
+    counts: 各规格根数列表
+    beam_contact_area_m2: 梁板接触面积（m²），用于扣减
+    """
+    if not (len(perimeters_m) == len(heights_m) == len(counts)):
+        raise ValueError("perimeters_m / heights_m / counts 长度必须相同")
+    items = []
+    gross = 0.0
+    for p, h, n in zip(perimeters_m, heights_m, counts):
+        a = round(p * h * n, 4)
+        items.append({"perimeter_m": p, "height_m": h, "count": n, "area_m2": a,
+                       "formula": f"{p}×{h}×{n}={a} m²"})
+        gross += a
+    net = round(gross - beam_contact_area_m2, 4)
+    return {
+        "items": items,
+        "gross_area_m2": round(gross, 4),
+        "beam_contact_deduct_m2": beam_contact_area_m2,
+        "net_area_m2": net,
+        "formula": f"Σ(周长×净高×根数) - {beam_contact_area_m2} = {net} m²",
+    }
+
+
+def calc_expansion_joint_band(
+    band_area_m2: float,
+    slab_thickness_m: float,
+    end_count: int,
+    band_perimeter_m: float,
+) -> dict:
+    """
+    底板膨胀加强带工程量（R15规则）。
+    band_area_m2: 加强带总面积（m²，图纸量取）
+    slab_thickness_m: 板厚（m）
+    end_count: 端头数量（每条带 2 端，3条带=6端）
+    band_perimeter_m: 加强带总侧面展开长度（m），用于计算钢丝网面积
+    """
+    vol = round(band_area_m2 * slab_thickness_m, 4)
+    end_formwork = round(end_count * slab_thickness_m * 2, 4)  # 端头截面近似2×板厚（带宽/板厚比）
+    wire_mesh = round(band_perimeter_m * slab_thickness_m * 2, 4)  # 两侧
+    return {
+        "band_area_m2": band_area_m2,
+        "slab_thickness_m": slab_thickness_m,
+        "volume_m3": vol,
+        "end_count": end_count,
+        "end_formwork_m2": end_formwork,
+        "wire_mesh_m2": wire_mesh,
+        "formula_volume": f"{band_area_m2}×{slab_thickness_m} = {vol} m³",
+        "formula_wire_mesh": f"{band_perimeter_m}×{slab_thickness_m}×2 = {wire_mesh} m²（两侧）",
+        "note": "R15: 端头模板单独列项；钢丝网列为措施项",
+    }
+
+
+def flag_overhigh_formwork(
+    formwork_area_m2: float,
+    actual_height_m: float,
+    threshold_m: float = 3.6,
+) -> dict:
+    """
+    超高模板标记与面积拆分（R17规则）。
+    formwork_area_m2: 该构件模板总面积（m²）
+    actual_height_m: 构件净高（m）
+    threshold_m: 超高起算高度（默认3.6m）
+    返回：正常高度范围面积 + 超高部分面积（按高度比例拆分）
+    """
+    if actual_height_m <= threshold_m:
+        return {
+            "is_overhigh": False,
+            "actual_height_m": actual_height_m,
+            "threshold_m": threshold_m,
+            "overhigh_height_m": 0.0,
+            "normal_area_m2": formwork_area_m2,
+            "overhigh_area_m2": 0.0,
+            "total_area_m2": formwork_area_m2,
+            "note": "未超高，清单全部按正常计",
+        }
+    overhigh_h = actual_height_m - threshold_m
+    ratio = overhigh_h / actual_height_m
+    overhigh_area = round(formwork_area_m2 * ratio, 4)
+    normal_area = round(formwork_area_m2 - overhigh_area, 4)
+    return {
+        "is_overhigh": True,
+        "actual_height_m": actual_height_m,
+        "threshold_m": threshold_m,
+        "overhigh_height_m": round(overhigh_h, 4),
+        "normal_area_m2": normal_area,
+        "overhigh_area_m2": overhigh_area,
+        "total_area_m2": formwork_area_m2,
+        "formula": (
+            f"超高面积: {formwork_area_m2}×({overhigh_h:.3f}/{actual_height_m}) = {overhigh_area} m²"
+        ),
+        "note": "R17: 清单总量含超高部分；超高部分另列措施项",
     }
 
 
